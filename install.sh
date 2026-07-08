@@ -49,17 +49,19 @@ main() {
     install_dir="/usr/local/bin"
 
     echo "Downloading $BIN $version ($os/$arch)..."
+    local tmpfile="/tmp/${BIN}-download"
     if command -v sudo &>/dev/null; then
-        curl -sSfL "$url" -o "/tmp/$BIN" || {
+        curl -sSfL "$url" -o "$tmpfile" || {
             echo "Download failed (URL: $url)"; exit 1
         }
-        chmod +x "/tmp/$BIN"
-        sudo mv "/tmp/$BIN" "$install_dir/$BIN"
+        chmod +x "$tmpfile"
+        sudo mv "$tmpfile" "$install_dir/$BIN"
     else
-        curl -sSfL "$url" -o "$install_dir/$BIN" 2>/dev/null || {
+        curl -sSfL "$url" -o "$tmpfile" 2>/dev/null || {
             echo "Need sudo or run as root"; exit 1
         }
-        chmod +x "$install_dir/$BIN"
+        chmod +x "$tmpfile"
+        mv "$tmpfile" "$install_dir/$BIN"
     fi
 
     echo "Installed $BIN $version to $install_dir/$BIN"
