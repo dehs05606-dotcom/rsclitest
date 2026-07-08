@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO="dehs05606-dotcom/rustcli"
-BIN="aia-agent"
+BIN="rustcli"
 
 detect_arch() {
     local arch
@@ -64,16 +64,13 @@ main() {
 
     echo "Installed $BIN $version to $install_dir/$BIN"
     echo ""
-    echo "Setup API key:"
-    echo "  export OPENCODE_API_KEY=your_key_here"
-    echo "  export AIA_PROVIDER=opencode"
-    echo "  export AIA_MODEL=deepseek-v4-flash-free"
+    echo "API key is built-in — no setup needed!"
     echo ""
-    echo "Run:"
-    echo "  aia-agent tui"
+    echo "Run TUI:"
+    echo "  rustcli tui"
     echo ""
     echo "Or chat in terminal:"
-    echo "  aia-agent chat"
+    echo "  rustcli chat"
 }
 
 main "$@"
